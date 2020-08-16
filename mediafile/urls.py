@@ -7,8 +7,8 @@ urlpatterns = [
   path('list/',uploadfile_listView.as_view(),name='list' ),
   path('comment/<int:pk>/', commentview,name='comment'),
 
-  path('update/<int:pk>/', updateview ,name='update'),
-  path('delete/<int:pk>/', deleteview,name='delete'),
+  path('update/<int:pk>/', updateview.as_view() ,name='update'),
+  path('delete/<int:pk>/', deleteview.as_view(),name='delete'),
 
 
 

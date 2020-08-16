@@ -29,33 +29,21 @@ class uploadfile_listView(ListView):
 
 
 
-@login_required
-@checker_required
-def updateview(request, pk):
-  user_object = get_object_or_404(UploadFile, author_id=pk)
-  if request.method == 'POST':
-      form = FileCreateForm(
-          request.POST, instance=user_object
-      )
-      if form.is_valid():
-          print("form is valid")
-          print(form.cleaned_data)
-          form.save()
-          return redirect(f'/files/update/{pk}')
-      else:
-          print("form is invalid")
-  else:
-      form = FileCreateForm(instance=user_object)
+@method_decorator(login_required, name='dispatch')
+class updateview(UpdateView):
+  form_class = FileCreateForm
+  success_url = '/files/list/'
+  model = UploadFile
+  template_name = 'mediafile/update.html'
 
-  return render(request, 'accounts/update.html', {
-      'form': form
-  })
-@login_required
-@checker_required
-def deleteview(request,pk):
-  obj = get_object_or_404(UploadFile,author_id=pk)
-  obj.delete()
-  return redirect(request, '/files/list/')
+
+@method_decorator(login_required, name='dispatch')
+class deleteview(DeleteView):
+  model = UploadFile
+  success_url = '/files/list'
+
+  def get(self, request, *args, **kwargs):
+    return self.post(request, *args, **kwargs)
 
   
 
