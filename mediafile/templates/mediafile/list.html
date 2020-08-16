@@ -1,0 +1,22 @@
+<h1>WelCome to list of all file</h1>
+<a href ="{% url 'files:create' %}">Upload File</a></br>
+
+<hr>
+{% for u in data %}
+<hr>
+    Title: <b>{{ u.title }}</b>
+    File:<b>{{ u.file }}</b>
+    Created By:<b>{{ u.author }}</b>
+    Created At: <b>{{ u.created_on }}</b>
+   
+    {% if request.user.is_checker %}
+    <a href="{% url 'files:update' u.id %}">update</a>
+    <a href="{% url 'files:delete' u.id %}">delete</a>
+    {% endif %}
+    <a href="{% url 'files:comment' u.id %}">Comment</a>
+    {% block detail %} {% include 'mediafile/detail.html' %} {% endblock detail %}
+    <hr>
+{% endfor %}
+
+<hr>
+<a href="{% url 'accounts:logout'%}">LogOut</a>
