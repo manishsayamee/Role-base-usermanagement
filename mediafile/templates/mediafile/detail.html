@@ -1,21 +1,37 @@
 
 
-{% block detail %}
+
+<p>{{ post.author }} | {{ post.created_on }}</p
+<p>{{ post.file | safe }}</p>
+  
+
+<h2>{{ comments.count }} comments</h2>
+
 {% for comment in comments %}
 
-
-
-<div class="comments" style="padding: 10px;">
-  <p class="font-weight-bold">
-    {{ comment.name }}
-    <span class=" text-muted font-weight-normal">
+  <p >
+    {{ comment.body }}
+    <span>
+      {{ comment.name }}
+    </span>
+    <span>
       {{ comment.created_on }}
     </span>
-  
   </p>
-  {{ comment.body }}
-</div>
+
 {% endfor %}
 
-{% endblock detail %}
+{% if new_comment %}
 
+
+  Your comment is awaiting moderation
+
+{% else %}
+
+<h3>Leave a comment</h3>
+<form method="post">
+  {{ comment_form.as_p }}
+  {% csrf_token %}
+  <button>Submit</button>
+</form>
+{% endif %}

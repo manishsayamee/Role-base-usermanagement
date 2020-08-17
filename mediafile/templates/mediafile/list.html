@@ -1,5 +1,7 @@
 <h1>WelCome to list of all file</h1>
 <a href ="{% url 'files:create' %}">Upload File</a></br>
+<a href ="{% url 'accounts:login' %}">Login</a></br>
+<a href ="{% url 'accounts:signup' %}">Sign UP</a></br>
 
 <hr>
 {% for u in data %}
@@ -13,7 +15,9 @@
     <a href="{% url 'files:update' u.id %}">update</a>
     <a href="{% url 'files:delete' u.id %}">delete</a>
     {% endif %}
-    <a href="{% url 'files:comment' u.id %}">Comment</a>
+    <a href="{% url 'files:detail' u.id %}">Detail</a>
+    <hr>
+  
     {% block detail %} {% include 'mediafile/detail.html' %} {% endblock detail %}
     <hr>
 {% endfor %}

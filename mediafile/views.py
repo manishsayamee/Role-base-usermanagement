@@ -37,6 +37,7 @@ class updateview(UpdateView):
   template_name = 'mediafile/update.html'
 
 
+# @checker_required
 @method_decorator(login_required, name='dispatch')
 class deleteview(DeleteView):
   model = UploadFile
@@ -45,27 +46,39 @@ class deleteview(DeleteView):
   def get(self, request, *args, **kwargs):
     return self.post(request, *args, **kwargs)
 
-  
 
-
-def commentview(request, pk):
-  template_name = 'comment.html'
-  post = get_object_or_404(UploadFile, id=pk)
+def detailview(request, pk):
+  template_name = 'mediafile/detail.html'
+  post = get_object_or_404(UploadFile, author_id=pk)
   comments = post.comments.filter(active=True)
   new_comment = None
+  # Comment posted
   if request.method == 'POST':
-  
-    comment_form = commentForm(data=request.POST)
+    comment_form = commentForm(request.POST)
     if comment_form.is_valid():
-
       new_comment = comment_form.save(commit=False)
       new_comment.post = post
       new_comment.save()
   else:
     comment_form = commentForm()
+  return render(request, template_name, {'post': post,'comments': comments, 'new_comment': new_comment,'comment_form': comment_form})
+                                       
+                                        
+# def tryself(request):
+#   if request.method == 'POST':
+#     comment_form = commentForm(request.POST)
+#     if comment_form.is_valid():
+#       # new_comment = comment_form.save(commit=False)
+#       # new_comment.post = post
+#       comment_form.save()
+#   else:
+#     comment_form = commentForm()
+#   return render(request, 'mediafile/try.html', {'new_comment':comment_form})
 
-  return render(request, template_name, {'post': post,
-                                          'comments': comments,
-                                          'new_comment': new_comment,
-                                          'comment_form': comment_form})
+
+# class tryself(CreateView):
+#   template_name ='mediafile/try.html'
+#   form_class = commentForm
+#   success_url = '/files/list'
+
 

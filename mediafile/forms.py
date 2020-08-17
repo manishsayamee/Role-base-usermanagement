@@ -11,6 +11,6 @@ class FileCreateForm(forms.ModelForm):
 class commentForm(forms.ModelForm):
   class Meta:
     model = Comment
-    fields = ['name', 'body']
+    fields = ['name','body']
 
 

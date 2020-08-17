@@ -20,7 +20,7 @@ class UploadFile(models.Model):
 class Comment(models.Model):
   mediafile = models.ForeignKey(UploadFile, on_delete=models.CASCADE)
   created_on = models.DateTimeField(auto_now_add=True)
-  name = models.CharField(max_length=150)
+  name = models.CharField(max_length=150, blank=True)
   body = models.TextField()
   
   class Meta:
