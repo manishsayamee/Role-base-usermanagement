@@ -12,6 +12,7 @@
 <hr>
     Title: <b>{{ u.title }}</b>
     File:<b>{{u.file}}</b>
+    File: <a href="/media/{{u.file}}">File</a>
     Created By:<b>{{ u.author }}</b>
     Created At: <b>{{ u.created_on }}</b>
    
@@ -22,7 +23,7 @@
     <a href="{% url 'files:detail' u.id %}">Detail</a>
     <hr>
   
-    {% block detail %} {% include 'mediafile/detail.html' %} {% endblock detail %}
+
     <hr>
 {% endfor %}
 

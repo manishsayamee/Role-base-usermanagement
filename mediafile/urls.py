@@ -8,8 +8,4 @@ urlpatterns = [
   path('detail/<int:pk>/', detailview ,name='detail'),
   path('update/<int:pk>/', updateview.as_view() ,name='update'),
   path('delete/<int:pk>/', deleteview.as_view(),name='delete'),
-  # path('try/', tryself.as_view(), name='try'),
-
-
-
 ]

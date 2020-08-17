@@ -1,37 +1,38 @@
 
 
+<p>File: <a href="/media/{{ post.file }}">{{ post.file | safe }}</a></p>
+<p><b>{{ post.author }} | {{ post.created_on }}</b></p
 
-<p>{{ post.author }} | {{ post.created_on }}</p
-<p>{{ post.file | safe }}</p>
-  
 
-<h2>{{ comments.count }} comments</h2>
+<h2>{{ comments.count }} Comments list</h2>
 
 {% for comment in comments %}
+<hr>
+<p >
+  {{ comment.body }}
+</p>
+  <span>
+    <b>{{ comment.name }}</b>
+  </span>
+  <span>
+    {{ comment.created_on }}
+  </span>
 
-  <p >
-    {{ comment.body }}
-    <span>
-      {{ comment.name }}
-    </span>
-    <span>
-      {{ comment.created_on }}
-    </span>
-  </p>
-
+<hr>
 {% endfor %}
 
 {% if new_comment %}
 
 
-  Your comment is awaiting moderation
+Your comment is awaiting moderation
 
 {% else %}
 
 <h3>Leave a comment</h3>
 <form method="post">
-  {{ comment_form.as_p }}
+
   {% csrf_token %}
+  {{ comment_form.as_p }}
   <button>Submit</button>
 </form>
 {% endif %}

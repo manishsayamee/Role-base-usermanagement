@@ -49,36 +49,16 @@ class deleteview(DeleteView):
 
 def detailview(request, pk):
   template_name = 'mediafile/detail.html'
-  post = get_object_or_404(UploadFile, author_id=pk)
-  comments = post.comments.filter(active=True)
+  post = get_object_or_404(UploadFile, id=pk)
+  comments = Comment.objects.filter(mediafile_id = pk)
   new_comment = None
   # Comment posted
   if request.method == 'POST':
     comment_form = commentForm(request.POST)
     if comment_form.is_valid():
       new_comment = comment_form.save(commit=False)
-      new_comment.post = post
+      new_comment.mediafile_id = post.id
       new_comment.save()
   else:
     comment_form = commentForm()
-  return render(request, template_name, {'post': post,'comments': comments, 'new_comment': new_comment,'comment_form': comment_form})
-                                       
-                                        
-# def tryself(request):
-#   if request.method == 'POST':
-#     comment_form = commentForm(request.POST)
-#     if comment_form.is_valid():
-#       # new_comment = comment_form.save(commit=False)
-#       # new_comment.post = post
-#       comment_form.save()
-#   else:
-#     comment_form = commentForm()
-#   return render(request, 'mediafile/try.html', {'new_comment':comment_form})
-
-
-# class tryself(CreateView):
-#   template_name ='mediafile/try.html'
-#   form_class = commentForm
-#   success_url = '/files/list'
-
-
+  return render(request, template_name, {'post': post,'comments':comments, 'new_comment': new_comment,'comment_form': comment_form})
