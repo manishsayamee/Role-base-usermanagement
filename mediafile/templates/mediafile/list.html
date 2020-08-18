@@ -14,7 +14,11 @@ h1{
 }
 
 h1, li, a{font-family:Times New Roman;}
+.btn{
+    margin:5px;
+}
 </style>
+
 
 
 <div class="container">
@@ -42,8 +46,8 @@ h1, li, a{font-family:Times New Roman;}
         Created At: <b>{{ u.created_on }}</b>
 
         {% if request.user.is_checker %}
-        <a href="{% url 'files:update' u.id %}">update</a>
-        <a href="{% url 'files:delete' u.id %}">delete</a>
+        <a class='btn btn-primary' href="{% url 'files:update' u.id %}">update</a>
+        <a class= 'btn btn-primary' href="{% url 'files:delete' u.id %}">delete</a>
         {% endif %}
         <a class="btn btn-primary" href="{% url 'files:detail' u.id %}">Detail &rarr;</a>
         <hr>
