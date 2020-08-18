@@ -1,4 +1,4 @@
-
+<!-- 
 {% extends 'accounts/base.html' %}
 {% block content %}
 <style>
@@ -19,10 +19,18 @@
 </style>
 
 <body class="container">
-  <h1  class="sign" style="font-family:Times New Roman;">Login Form</h1>
+  <h1  class="sign" style="font-family:Times New Roman;">SignUp as Checker</h1>
   <div class="card">
       <form method="post">
-        {% csrf_token %}  
+        {% csrf_token %}
+          <div class="form-group">
+              <label>First Name</label>
+              <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
+          </div>
           <div class="form-group">
             <label>Username</label>
             <input type="text" class="form-control" placeholder="Username" name="username" required>
@@ -31,9 +39,13 @@
             <label>Password</label>
             <input type="password" class="form-control"  name="password" required>
           </div>
+          <div class="form-group">
+              <label for="password">Confirm Password</label>
+              <input type='password' class="form-control" name="onfirm_password" required>
+          </div>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>
   
   </body>
-  {% endblock %}
+  {% endblock %} -->

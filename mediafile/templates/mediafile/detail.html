@@ -1,38 +1,101 @@
 
+{% extends 'accounts/base.html' %}
 
-<p>File: <a href="/media/{{ post.file }}">{{ post.file | safe }}</a></p>
-<p><b>{{ post.author }} | {{ post.created_on }}</b></p
+{% block content %}
+<style>
+  .container{
+    color:white
+  }
+hr{
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+h1, li, a{font-family:Times New Roman;}
+
+h2{
+  text-align: left;
+}
+
+.sign{
+  margin-top: 20px;margin-left: 25%;color:white; 
+}
+.card{
+
+  padding: 30px; border-radius: 10px; width:50%;
+  margin:25px;
+  margin-left:15px;
+}
+label{
+  color:black
+}
+
+</style>
 
 
-<h2>{{ comments.count }} Comments list</h2>
+<div class="container">
 
-{% for comment in comments %}
-<hr>
-<p >
-  {{ comment.body }}
-</p>
-  <span>
-    <b>{{ comment.name }}</b>
-  </span>
-  <span>
-    {{ comment.created_on }}
-  </span>
+  <h1>Detail and Comments of file</h1>
+  {% if request.user.is_maker %}
+  <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br>
+  {% endif %}
+  <div class='row'>
+      <div clas='col-2'>
+          <a class = 'btn btn-primary' href ="{% url 'accounts:signup' %}">New User</a></br>
+      </div>
 
-<hr>
-{% endfor %}
+      <div class='col-10'style="text-align:right";>
+          <a class = 'btn btn-primary' href ="{% url 'accounts:logout' %}">LogOut</a></br>
+      </div>
+  </div>
+  <p>File: <a href="/media/{{ post.file }}">{{ post.file | safe }}</a></p>
+  <p><b>{{ post.author }} | {{ post.created_on }}</b></p
 
-{% if new_comment %}
+
+  <h2><b>{{ comments.count }} Comments list</b></h2>
+
+  {% for comment in comments %}
+  <hr>
+  <p >
+    {{ comment.body }}
+  </p>
+    <span>
+      <b>{{ comment.name }}</b>
+    </span>
+    <span>
+      {{ comment.created_on }}
+    </span>
+
+  <hr>
+  {% endfor %}
+
+  {% if new_comment %}
 
 
-Your comment is awaiting moderation
+  Your comment is awaiting moderation
 
-{% else %}
+  {% else %}
 
-<h3>Leave a comment</h3>
-<form method="post">
+  <h2>Leave a comment</h2>
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label>Comments</label>
+          <input type="textarea" class="form-control" placeholder="Comments..." name="body" required>
+        </div>
 
-  {% csrf_token %}
-  {{ comment_form.as_p }}
-  <button>Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
 {% endif %}
+
+{% endblock %}

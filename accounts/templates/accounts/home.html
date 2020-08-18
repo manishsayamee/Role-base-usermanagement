@@ -1,0 +1,14 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<body>
+<div class ="main">
+<h3>MANISH SAYAMEE</h3>
+<h5>Welcome to my awesome Intern Projects</h5>
+<a href="{% url 'accounts:signupmaker' %}" class="btn btn-primary">SignUp as Maker &rarr;</a>
+<a href="{% url 'accounts:signupchecker' %}" class="btn btn-primary">SignUp as Checker &rarr;</a>
+</div>
+
+
+
+{% endblock %}

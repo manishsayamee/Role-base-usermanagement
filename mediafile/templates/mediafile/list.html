@@ -1,30 +1,55 @@
+{% extends 'accounts/base.html' %}
 
-<h1>WelCome to list of all file</h1>
-{% if request.user.is_maker %}
-<a href ="{% url 'files:create' %}">Upload File</a></br>
-{% endif %}
-<a href ="{% url 'accounts:login' %}">Login</a></br>
-<a href ="{% url 'accounts:signup' %}">Sign UP</a></br>
-<a href="{% url 'accounts:logout'%}">LogOut</a>
+{% block content %}
+<style>
+.container{
+    color:white
+}
+hr{
+    color: white;
+}
 
-<hr>
-{% for u in data %}
-<hr>
-    Title: <b>{{ u.title }}</b>
-    File:<b>{{u.file}}</b>
-    File: <a href="/media/{{u.file}}">File</a>
-    Created By:<b>{{ u.author }}</b>
-    Created At: <b>{{ u.created_on }}</b>
-   
-    {% if request.user.is_checker %}
-    <a href="{% url 'files:update' u.id %}">update</a>
-    <a href="{% url 'files:delete' u.id %}">delete</a>
+h1{
+    text-align: center;
+}
+
+h1, li, a{font-family:Times New Roman;}
+</style>
+
+
+<div class="container">
+
+    <h1>Lists of all Files</h1>
+    {% if request.user.is_maker %}
+    <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br>
     {% endif %}
-    <a href="{% url 'files:detail' u.id %}">Detail</a>
-    <hr>
-  
+    <div class='row'>
+        <div clas='col-2'>
+            <a class = 'btn btn-primary' href ="{% url 'accounts:home' %}">New User</a></br>
+        </div>
+
+        <div class='col-10'style="text-align:right";>
+            <a class = 'btn btn-primary' href ="{% url 'accounts:logout' %}">LogOut</a></br>
+        </div>
+    </div>
 
     <hr>
-{% endfor %}
+    {% for u in data %}
+        <li>
+        Title: <b>{{ u.title }}</b>
+        File: <a class="btn btn-primary" href="/media/{{u.file}}">{{ u.file }}</a>
+        Created By:<b>{{ u.author }}</b>
+        Created At: <b>{{ u.created_on }}</b>
 
-<hr>
+        {% if request.user.is_checker %}
+        <a href="{% url 'files:update' u.id %}">update</a>
+        <a href="{% url 'files:delete' u.id %}">delete</a>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'files:detail' u.id %}">Detail &rarr;</a>
+        <hr>
+    {% endfor %}
+    <hr>
+    </li>
+</div>
+
+{% endblock %}
