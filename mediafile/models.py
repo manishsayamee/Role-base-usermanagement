@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+import os 
 
 class UploadFile(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -7,6 +8,11 @@ class UploadFile(models.Model):
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   file = models.FileField()
+
+  def extension(self):
+    extension = os.path.splitext(self.file)[1]
+    print(extension)
+    return extension
 
 
   class Meta:

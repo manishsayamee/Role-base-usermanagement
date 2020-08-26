@@ -1,0 +1,27 @@
+{% block sidebar %}
+
+<style>
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: blue;
+
+}</style>
+<div class="sidebar">
+  <a href = "#" >Dashboard</a>
+  <a href="#" data-toggle="collapse" data-target="#demo">Sign Up</a>
+  <div id="demo" class="collapse">
+    <a href="{% url 'accounts:signupmaker' %}" >Maker</a>
+    <a href="{% url 'accounts:signupchecker' %}" >Checker</a>
+  </div>
+  <a href ="{% url 'files:create' %}">Upload File</a>
+</div>
+
+{% endblock %}

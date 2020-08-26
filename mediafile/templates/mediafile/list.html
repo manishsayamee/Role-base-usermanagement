@@ -1,59 +1,77 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
+
+    
 <style>
-.container{
-    color:white
-}
-hr{
-    color: white;
-}
+    hr{
+        color: white;
+    }
 
-h1{
-    text-align: center;
-}
+    h1{
+        text-align: center;
+    }
 
-h1, li, a{font-family:Times New Roman;}
-.btn{
-    margin:5px;
-}
+    h1, li, a{font-family:Times New Roman;}
+    .btn{
+        margin:5px;
+    }
+    img{
+        width: 350px;
+        height: 400px;
+        text-align: center;
+        margin-left:20vw;
+    }
+
 </style>
 
 
 
-<div class="container">
-
-    <h1>Lists of all Files</h1>
-    {% if request.user.is_maker %}
-    <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br>
-    {% endif %}
-    <div class='row'>
-        <div clas='col-2'>
-            <a class = 'btn btn-primary' href ="{% url 'home' %}">New User</a></br>
-        </div>
-
-        <div class='col-10'style="text-align:right";>
-            <a class = 'btn btn-primary' href ="{% url 'accounts:logout' %}">LogOut</a></br>
-        </div>
+<div class='row'>
+    <div class="col-3">
+        {% block sidebar %} 
+        {% include 'accounts/sidebar.html' %}
+        {% endblock %}
     </div>
-
-    <hr>
-    {% for u in data %}
-        <li>
-        Title: <b>{{ u.title }}</b>
-        File: <a class="btn btn-primary" href="/media/{{u.file}}">{{ u.file }}</a>
-        Created By:<b>{{ u.author }}</b>
-        Created At: <b>{{ u.created_on }}</b>
-
-        {% if request.user.is_checker %}
-        <a class='btn btn-primary' href="{% url 'files:update' u.id %}">update</a>
-        <a class= 'btn btn-primary' href="{% url 'files:delete' u.id %}">delete</a>
+    <div class="col-9">
+        <h1>Lists of all Files</h1>
+        {% if request.user.is_maker %}
+        <!-- <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br> -->
         {% endif %}
-        <a class="btn btn-primary" href="{% url 'files:detail' u.id %}">Detail &rarr;</a>
+        <div class='row'>
+            <div clas='col-2'>
+                <a class = 'btn btn-primary' href ="{% url 'accounts:signupmaker' %}">New User</a></br>
+            </div>
+            <div class='col-10'style="text-align:right";>
+                <a class = 'btn btn-primary' href ="{% url 'accounts:logout' %}">LogOut</a></br>
+            </div>
+        </div>
         <hr>
-    {% endfor %}
-    <hr>
-    </li>
+        {% for u in data %}
+        <div class="post">
+            <h2> Title: <b>{{ u.title }}</b></h2>
+            <img src = '/media/{{u.file}}'>
+            <p>
+               
+                File: <a class="btn btn-primary" href="/media/{{u.file}}">{{ u.file }}</a>
+                File Name:{{u.file }}</b>
+                Created By:<b>{{ u.author }}</b>
+                Created At: <b>{{ u.created_on }}</b>
+                {% if request.user.is_checker %}
+                <a class='btn btn-primary' href="{% url 'files:update' u.id %}">update</a>
+                <a class= 'btn btn-primary' href="{% url 'files:delete' u.id %}">delete</a>
+                {% endif %}
+                <a class="btn btn-primary" href="{% url 'files:detail' u.id %}">Detail &rarr;</a>
+            </p>
+       <hr>
+        {% endfor %}
+
+        </div>
+        <hr>
+    </div>
 </div>
+
+
+
 
 {% endblock %}
