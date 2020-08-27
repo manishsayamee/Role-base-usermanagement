@@ -36,9 +36,6 @@
         margin-left: 2px;
     }
 </style>
-
-
-
 <div class='row'>
     <div class="col-3">
         {% block sidebar %} 
@@ -62,7 +59,15 @@
         {% for u in data %}
         <div class="post">
             <h2> Title: <b>{{ u.title }}</b></h2>
-            <img src = '/media/{{u.file}}'>
+            {% if uploadfile.css_class == 'pdf' %}
+                <embed src='/media/{{u.file}}'>
+            {% elif uploadfile.css_class == 'mp4' %}
+                <video>
+                    <source src='/media/{{u.file}}'>
+                </video>
+            {% else %}
+                <img src = '/media/{{u.file}}'>
+            {% endif %}
                 <p>
                 File: <a class="btn btn-primary" href="/media/{{u.file}}">{{ u.file }}</a>
                 File Name:{{u.file }}</b>
