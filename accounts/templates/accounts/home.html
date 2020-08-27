@@ -2,12 +2,20 @@
 
 {% block content %}
 
+<style>
+    .col-3{
+    margin-top: 4vw;
+    position: absolute;;
+    }
+    
+</style>
 
 <div class="col-3">
   {% block sidebar %} 
   {% include 'accounts/sidebar.html' %}
   {% endblock %}
 </div>
+
 
 
 {% endblock %}

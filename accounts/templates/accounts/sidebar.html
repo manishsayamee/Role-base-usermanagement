@@ -10,18 +10,32 @@
   display: block;
 }
 
+
+
 .sidebar a:hover {
   color: blue;
 
-}</style>
-<div class="sidebar">
-  <a href = "#" >Dashboard</a>
-  <a href="#" data-toggle="collapse" data-target="#demo">Sign Up</a>
-  <div id="demo" class="collapse">
-    <a href="{% url 'accounts:signupmaker' %}" >Maker</a>
-    <a href="{% url 'accounts:signupchecker' %}" >Checker</a>
+
+}
+.sidebar{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#demo{
+  margin-left: 15px;
+}
+</style>
+
+  <div class="sidebar">
+    <a href = "#" >Dashboard</a>
+    <a href="#" data-toggle="collapse" data-target="#demo">Sign Up</a>
+    <div id="demo" class="collapse">
+      <a href="{% url 'accounts:signupmaker' %}" >Maker</a>
+      <a href="{% url 'accounts:signupchecker' %}" >Checker</a>
+    </div>
+    <a href ="{% url 'files:create' %}">Upload File</a>
   </div>
-  <a href ="{% url 'files:create' %}">Upload File</a>
-</div>
+
+
 
 {% endblock %}

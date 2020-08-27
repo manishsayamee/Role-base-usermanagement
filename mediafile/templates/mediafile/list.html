@@ -22,7 +22,19 @@
         text-align: center;
         margin-left:20vw;
     }
+    .col-9{
+        margin-top: 60px;
+        margin-left: 25vw;
+        position:static;
+    }
+    .col-3{
+    margin-top: 4vw;
+    position: fixed;
+    }
 
+    .row-1{
+        margin-left: 2px;
+    }
 </style>
 
 
@@ -36,9 +48,9 @@
     <div class="col-9">
         <h1>Lists of all Files</h1>
         {% if request.user.is_maker %}
-        <!-- <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br> -->
+        <a class ="btn btn-primary" href ="{% url 'files:create' %}">Upload File</a></br>
         {% endif %}
-        <div class='row'>
+        <div class='row row-1' >
             <div clas='col-2'>
                 <a class = 'btn btn-primary' href ="{% url 'accounts:signupmaker' %}">New User</a></br>
             </div>
@@ -51,8 +63,7 @@
         <div class="post">
             <h2> Title: <b>{{ u.title }}</b></h2>
             <img src = '/media/{{u.file}}'>
-            <p>
-               
+                <p>
                 File: <a class="btn btn-primary" href="/media/{{u.file}}">{{ u.file }}</a>
                 File Name:{{u.file }}</b>
                 Created By:<b>{{ u.author }}</b>
@@ -64,9 +75,8 @@
                 <a class="btn btn-primary" href="{% url 'files:detail' u.id %}">Detail &rarr;</a>
             </p>
        <hr>
-        {% endfor %}
-
         </div>
+        {% endfor %}
         <hr>
     </div>
 </div>

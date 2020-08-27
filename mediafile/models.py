@@ -9,17 +9,21 @@ class UploadFile(models.Model):
   updated_on = models.DateTimeField(auto_now=True)
   file = models.FileField()
 
-  def extension(self):
-    extension = os.path.splitext(self.file)[1]
-    print(extension)
-    return extension
-
-
   class Meta:
     ordering = ['-created_on']
 
-  def __str__(self):
-    return self.title
+
+
+  def css_class(self):
+    extension = os.path.splitext(self.file.name)
+    if extension == 'pdf':
+      return 'pdf'
+    elif extension == 'doc':
+      return 'word'
+    elif extension == 'png':
+      return 'png'
+    else:
+      return 'mp4'
 
 
 
