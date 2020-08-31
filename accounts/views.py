@@ -15,34 +15,6 @@ class SignupmakerView(CreateView):
   form_class = SignupmakerForm
   template_name = 'accounts/makersignup.html'
   success_url = '/accounts/login'
-  
-# def SignupmakerView(request):
-#   if request.method == 'POST':
-#     form = SignupmakerForm(request.POST)
-#     if form.is_valid():
-#       print("form is valid")
-#       print(form.cleaned_data)
-#       user = USER(
-#           username=form.cleaned_data['username'],
-#           first_name=form.cleaned_data['first_name'],
-#           last_name=form.cleaned_data['last_name'],
-#       )
-#       user.save()
-#       user.set_password(form.cleaned_data['password'])
-#       user.save()
-
-#       logout(request)
-#       login(request, user)
-
-#       return redirect('/accounts/login/')
-
-#   elif request.method == 'GET':
-
-#     form = SignupmakerForm()
-
-#   return render(request, 'accounts/makersignup.html', {'form': form})
-
-
 
 
 class SignupCheckerView(CreateView):

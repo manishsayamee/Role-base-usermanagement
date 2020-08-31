@@ -1,4 +1,4 @@
-
+<!-- 
 {% extends 'accounts/base.html' %}
 {% block content %}
 <style>
@@ -31,17 +31,16 @@
             <label>File</label>
             <input type="file" class="form-control" placeholder="Upload File" name="file" required>
           </div>
-          <div class="form-group">
-            <label for='forselecttypeoffile'>Type of File</label>
-            <select class="form-control" name="Type">
-              <option value='1'>Image</option>
-              <option value = '2'>pdf</option>
-              <option value = '3'>Video</option>
-            </select>
-          </div>
+          <select name="Type" >
+            <option value='Image'>Image</option>
+            <option value = 'pdf'>pdf</option>
+            <option value = 'Video'>Video</option>
+          </select>
+
+
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>
   
   </body>
-   {% endblock %}  
+  {% endblock %}  -->

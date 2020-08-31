@@ -3,27 +3,23 @@ from accounts.models import User
 import os 
 
 class UploadFile(models.Model):
+  TypeOfFile=(
+    (1,'Image'),
+    (2, 'pdf'),
+    (3, 'Video')
+
+  )
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   title = models.CharField(max_length=150)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   file = models.FileField()
+  Type = models.IntegerField(choices=TypeOfFile, null=True)
 
   class Meta:
     ordering = ['-created_on']
 
 
-
-  def css_class(self):
-    extension = os.path.splitext(self.file.name)
-    if extension == 'pdf':
-      return 'pdf'
-    elif extension == 'doc':
-      return 'word'
-    elif extension == 'png':
-      return 'png'
-    else:
-      return 'mp4'
 
 
 
